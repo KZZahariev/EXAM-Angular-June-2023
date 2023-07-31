@@ -1,0 +1,84 @@
+<div class="bg-cover"
+            style="background-image: url(../../../assets/asphalt-highway.jpg)">
+        </div>
+<div class="min-h-screen flex items-center justify-center">
+    <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
+        <h2 class="text-slate-100 text-2xl font-semibold mb-4">Add Announcement</h2>
+        <form>
+            <div class="mb-4">
+                <label for="title" class="block text-gray-500 text-sm font-medium my-2">Where are you travel?</label>
+                <ul class="p-2 flex flex-nowrap">
+                    <li class="mr-2 mb-2">
+                        <label for="title" class="block text-gray-500 text-sm font-medium">From:</label>
+                        <input type="text" id="title" name="title"
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                            required>
+                    </li>
+                    <li class="mr-2 mb-2">
+                        <label for="title" class="block text-gray-500 text-sm font-medium">To:</label>
+                        <input type="text" id="title" name="title"
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                            required>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="mr-7 mb-2">
+                        <label for="title" class="block text-gray-500 text-sm font-medium">Price of ticket:</label>
+                        <input type="number" id="price" name="price"
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                            required>
+                    </li>
+                    <li class="mr-7 mb-2">
+                        <label for="title" class="block text-gray-500 text-sm font-medium">Date and time:</label>
+                        <input type="datetime-local" id="date" name="date"
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                            required>
+                    </li>
+                <!-- <ul class="p-2 mb-2 flex flex-nowrap">
+                    <li class="mr-2 mb-2">
+                            <label for="title" class="block text-gray-500 text-sm font-medium">Vehicle type:</label>
+                            <input type="option" id="vehicle" name="vehicle"
+                                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                                required>
+                    </li>
+                    <li class="mr-2 mb-2">
+                            <label for="title" class="block text-gray-500 text-sm font-medium">Make and model:</label>
+                            <input type="text" id="make-and-model" name="make-and-model"
+                                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                                required>
+                    </li>
+                </ul> -->
+                    <li class="mr-7 mb-2">
+                        <label for="title" class="block text-gray-500 text-sm font-medium">Space for baggage:</label>
+                        <select
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                            required>
+                            <input type="option" id="baggage" name="baggage"
+                                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                                required>
+                            <option>No space</option>
+                            <option>Small space</option>
+                            <option>Max one suitcase per person - 55 x 40 x 23 cm</option>
+                            <option>A lot of space</option>
+                        </select>
+                    </li>
+                    <li class="mr-7 mb-2">
+                        <label for="title" class="block text-gray-500 text-sm font-medium">Seats available:</label>
+                        <input type="number" id="make-and-model" name="make-and-model"
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                            required>
+                    </li>
+                </ul>
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-500 text-sm font-medium">Description</label>
+                <textarea id="description" name="description"
+                    class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 h-32 resize-none"
+                    required></textarea>
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Add
+                Announcement</button>
+        </form>
+    </div>
+</div>

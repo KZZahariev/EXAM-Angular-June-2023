@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRouterModule } from './user/user-routing.module';
 import { UserModule } from './user/user.module';
 import { appInterceptorProvider } from './app.interceptor';
+import { AnnouncementModule } from './announcements/announcement.module';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        MainComponent
+        MainComponent,
     ],
     imports: [
         BrowserModule,
@@ -24,6 +25,7 @@ import { appInterceptorProvider } from './app.interceptor';
         HttpClientModule,
         CoreModule,
         UserModule,
+        AnnouncementModule
         
     ],
     providers: [appInterceptorProvider],
