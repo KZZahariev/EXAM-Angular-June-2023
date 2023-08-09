@@ -8,15 +8,19 @@ import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRouterModule } from './user/user-routing.module';
-import { UserModule } from './user/user.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { AnnouncementModule } from './announcements/announcement.module';
+import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
+import { AuthenticatorComponent } from './authenticator/authenticator.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         MainComponent,
+        AnnouncementsListComponent,
+        AuthenticatorComponent,
+        
     ],
     imports: [
         BrowserModule,
@@ -24,7 +28,6 @@ import { AnnouncementModule } from './announcements/announcement.module';
         UserRouterModule,
         HttpClientModule,
         CoreModule,
-        UserModule,
         AnnouncementModule
         
     ],
