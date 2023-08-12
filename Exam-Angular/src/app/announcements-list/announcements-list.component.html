@@ -1,0 +1,123 @@
+<div class="bg-red-500 text-2xl" *ngIf="!errorFetchingData">Error loading announcements</div>
+
+<!-- <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
+        <h2 class="text-slate-100 text-2xl font-semibold mb-4">Add Announcement</h2>
+       
+    </div>
+</div> -->
+
+
+<!-- <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
+        <div *ngIf="!errorFetchingData">Error loading theme</div> -->
+<!-- <app-loader *ngIf="!announcementList"></app-loader> -->
+<!-- <div *ngFor="let announcement of announcementList" class="theme-container">
+            <div class="theme-name-wrapper">
+                <div class="theme-name" *ngIf="!isLoading">
+                    <a class="normal">
+                        <h2>from: {{announcement.from}}</h2>
+                        <h2>to: {{announcement.to}}</h2>
+                    </a>
+                    <div class="columns">
+                        <div>
+                            <p>Date: <time></time></p>
+                            <div class="nick-name">
+                                <p>Username: <span></span></p>
+                            </div>
+                        </div>
+                        <div class="subscribers">
+                            <button class="subscribe">Subscribe</button>
+                            <p>Subscribers: <span></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="bg-cover"
+            style="background-image: url(../../../assets/asphalt-highway.jpg)">
+        </div> -->
+<div class="grid grid-cols-1 md:grid-cols-3 pt-5 m-6  opacity-90">
+    <div *ngFor="let announcement of announcementList"
+        class="p-2 mb-12 flex-nowrap no-scrollbar flex items-center justify-center">
+        <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
+            <h2 class="text-slate-100 text-2xl font-semibold mb-4">Smile, laugh and travel</h2>
+            <div class="mb-4">
+                <!-- <label for="title" class="block text-gray-500 text-sm font-medium my-2">Where are you travel?</label> -->
+                <ul class="p-2 flex flex-nowrap">
+                </ul>
+                <ul>
+                    <li class="mr-2 mb-2">
+                        <label for="from" class="block text-gray-500 text-sm font-medium">From: <span
+                                class="text-white">
+                                {{announcement.from}}</span></label>
+                    </li>
+                    <li class="mr-2 mb-2">
+                        <label for="to" class="block text-gray-500 text-sm font-medium">To: <span class="text-white">
+                                {{announcement.to}}</span></label>
+                    </li>
+                    <li class="mr-7 mb-2">
+                        <label for="price" class="block text-gray-500 text-sm font-medium">Price of ticket: <span
+                                class="text-white">
+                                {{announcement.price}}</span></label>
+                    </li>
+                </ul>
+            </div>
+            <ul class="">
+                <li class="p-2 flex flex-nowrap">
+                    <a [routerLink]="announcement._id"
+                        class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Details</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- na joro html-a -->
+<!-- <div
+    class="bg-gray-800 opacity-95 w-full md:w-fit mx-auto p-10 mt-8 rounded-2xl min-h-screen flex items-center justify-center">
+
+    <div class="flex justify-center text-center mb-10 uppercase cursor-default font-bold text-3xl">
+        Travel Ads
+    </div>
+    <div class="flex justify-center" *ngIf="isLoading">
+
+    </div>
+    <div>
+        <div *ngIf="isLoading === false"
+            class="flex flex-col text-sm items-center md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-3 md:space-y-0 space-y-4">
+            <div class="border-2 border-black max-w-2xl p-2 text-xs h-fit md:text-base lg:text-lg">
+                <span class="flex justify-center font-bold bg-green-700 p-1"></span>
+                <img class="w-40 mx-auto mt-2 h-40" alt="service" />
+                <img class="w-120 mx-auto mt-2 h-120" alt="service" />
+                <div class="mt-2">
+                    <p class="mx-autow-fit mx-auto mt-5 text-xl">
+                        Price:
+                    </p>
+                </div>
+
+                <div class="flex justify-center mt-4 space-x-2">
+                    <button class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white">
+                        Learn More
+                    </button>
+                    <button routerLink="/booking-form"
+                        class="border-2 rounded-full border-black p-2 hover:bg-green-700 hover:text-white">
+                        Book Now
+                    </button>
+                </div>
+                <div class="flex justify-center mt-4 space-x-3">
+                    <button class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white">
+                        Edit
+                    </button>
+                    <button class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

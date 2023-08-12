@@ -15,7 +15,7 @@ export class HeaderComponent {
     return this.userService.isLogged
   }
 
-  get userName(): string {
+  get username(): string {
     return this.userService.user?.username || '';
   }
 
@@ -23,6 +23,17 @@ export class HeaderComponent {
     this.userService.logout().subscribe({
       next: () => {
         this.router.navigate(['/auth/login']);
+      },
+      error: () => {
+        console.log('Can not logout right now');
+      }
+    })
+  };
+
+  profile() {
+    this.userService.getProfile().subscribe({
+      next: () => {
+        this.router.navigate(['/users/profile'])
       },
       error: () => {
         console.log('Can not logout right now');

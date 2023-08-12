@@ -13,13 +13,14 @@ export class UserService implements OnDestroy {
 
   user: User | undefined;
   USER_KEY = ['user'];
-
+  upDateProfile: any;
+  
   get isLogged(): boolean {
     return !!this.user;
   }
 
   subscription: Subscription;
-
+  
   constructor(private http: HttpClient) {
     this.subscription = this.user$.subscribe((user) => {
       this.user = user;
@@ -54,12 +55,26 @@ export class UserService implements OnDestroy {
       .pipe(tap(() => this.user$$.next(undefined)));
   }
 
-  getProfile(){
-    return this.http.get<User>(`/api/users/profile`)
-    .pipe(tap((user) => this.user$$.next(user)));
+  getProfile() {
+    return this.http
+      .get<User>(`/api/users/profile`)
+      .pipe(tap((user) => this.user$$.next(user)));
+  }
+
+  updateProfile(username: string, email: string) {
+    return this.http
+      .put<User>(`/api/users/profile`, {
+        username,
+        email,
+      })
+      .pipe(tap((user) => this.user$$.next(user)));
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  getUserIdFunction(){
+    return this.user$$.value?._id
   }
 }

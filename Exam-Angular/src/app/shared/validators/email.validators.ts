@@ -10,3 +10,4 @@ export function appEmailValidator(domain: string[]): ValidatorFn {
       : { appEmailValidator: true };
   };
 }
+  

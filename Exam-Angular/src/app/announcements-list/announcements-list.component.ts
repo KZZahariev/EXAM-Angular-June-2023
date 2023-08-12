@@ -14,13 +14,18 @@ export class AnnouncementsListComponent implements OnInit {
   announcementList: Announcement[] | null = null;
   errorFetchingData: boolean = true;
   isLoading: boolean = true;
-
+    
   constructor(private apiService: ApiService, private userService: UserService){}
+
+  get isLogged(): boolean{
+    return this.userService.isLogged
+  }
 
   ngOnInit(): void {
     
     this.apiService.loadAnnouncements().subscribe({
       next: (value) => {
+        console.log(value);
         this.announcementList = value;
         this.isLoading = false;
       },

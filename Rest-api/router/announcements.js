@@ -5,12 +5,13 @@ const { announcementController, postController } = require('../controllers');
 
 // middleware that is specific to this router
 
-router.get('/', announcementController.getAnnouncement);
+router.get('/', announcementController.getAnnouncements);
 router.post('/', auth(), announcementController.createAnnouncement);
 
 router.get('/:announcementId', announcementController.getAnnouncement);
 router.post('/:announcementId', auth(), postController.createPost);
 router.put('/:announcementId', auth(), announcementController.subscribe);
+router.get('/:announcementId/edit', auth(), announcementController.editAnnouncement);
 router.put('/:announcementId/posts/:postId', auth(), postController.editPost);
 router.delete('/:announcementId/posts/:postId', auth(), postController.deletePost);
 

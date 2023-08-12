@@ -16,7 +16,7 @@ export class NewAnnouncementComponent {
       return;
     }
 
-    const { from, to, price, date, seats, description } = form.value; ///tuka da vzemem dannite
+    const { from, to, price, date, seats, description } = form.value;
 
     console.log(form.value);
     this.apiService.createNewAnnouncement(from, to, price, date, seats, description).subscribe(() => {
