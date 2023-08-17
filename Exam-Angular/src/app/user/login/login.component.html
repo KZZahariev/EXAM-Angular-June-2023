@@ -4,25 +4,34 @@
         <form #form="ngForm" (ngSubmit)="login(form)">
             <div class="mb-4">
                 <label for="email" class="block text-gray-500 text-sm font-medium">Email</label>
-                <input type="email" id="email" name="email" #inputEmail ngModel required
+                <input type="email" id="email" name="email" #inputEmail="ngModel" ngModel required
+                    [appEmail]="emailDomains"
                     class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                <!-- <p class="text-red-500">
-                    Email is required!
-                </p> -->
-                <!-- <p class="text-red-500">
-                    Email is not valid!
-                </p> -->
+
+                <ng-container *ngIf="inputEmail.touched">
+                    <p class="text-red-500" *ngIf="inputEmail.errors?.['required']">
+                        Email is required!
+                    </p>
+                    <p class="text-red-500" *ngIf="inputEmail.errors?.['appEmailValidator']">
+                        Email is not valid!
+                    </p>
+                </ng-container>
+
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-500 text-sm font-medium">Password</label>
-                <input type="password" id="password" name="password" #inputPassword ngModel required
+                <input type="password" id="password" name="password" #inputPassword="ngModel" minlength="5" ngModel required
                     class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                <!-- <p class="text-red-500">
-                Password is required!
-                </p>
-                <p class="text-red-500">
-                    Password must be at least 4 characters!
-                </p> -->
+
+                <ng-container *ngIf="inputPassword.touched">
+                    <p class="text-red-500" *ngIf="inputPassword.errors?.['required']">
+                        Password is required!
+                    </p>
+                    <p class="text-red-500" *ngIf="inputPassword.errors?.['minlength']">
+                        Password must be at least 4 characters!
+                    </p>
+                </ng-container>
+
             </div>
             <button
                 class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Login</button>

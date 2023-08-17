@@ -36,7 +36,7 @@ import { SharedModule } from "./shared/shared.module";
         UserRouterModule,
         HttpClientModule,
         CoreModule,
-        AnnouncementModule,
+        // AnnouncementModule,
         UserModule,
         SharedModule
     ]

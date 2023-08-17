@@ -9,7 +9,7 @@ import { NewAnnouncementComponent } from './announcements/new-announcement/new-a
 import { CurrentAnnouncementComponent } from './announcements/current-announcement/current-announcement.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ErrorComponent } from './core/error/error.component';
-import { EditAnnouncementComponent } from './announcements/edit-announcement/edit-announcement.component';
+import { MyAnnouncementsComponent } from './announcements/my-announcements/my-announcements.component';
 
 const routes: Routes = [
   {
@@ -46,8 +46,8 @@ const routes: Routes = [
     component: CurrentAnnouncementComponent,
   },
   {
-    path: 'announcements/:announcementId/edit',
-    component: EditAnnouncementComponent,
+    path: 'my-announcements',
+    component: MyAnnouncementsComponent,
   },
   {
     path: 'error',

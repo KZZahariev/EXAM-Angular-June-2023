@@ -10,7 +10,6 @@ function getAnnouncements(req, res, next) {
 
 function getAnnouncement(req, res, next) {
     const { announcementId } = req.params;
-    console.log(announcementId);
     announcementModel.findById(announcementId)
         .populate({
             path: 'posts',
@@ -25,8 +24,7 @@ function getAnnouncement(req, res, next) {
 function createAnnouncement(req, res, next) {
     const { from, to, price, date, seats, description } = req.body;
     const { _id: userId } = req.user;
-
-    announcementModel.create({ from, to, price, date, seats, description, userId, subscribers: [userId] })
+    announcementModel.create({ from, to, price, date, seats, description, userId, })
         .then(announcement => {
             newPost(description, userId, announcement._id)
                 .then(([_, updatedAnnouncement]) => res.status(200).json(updatedAnnouncement))
@@ -44,33 +42,40 @@ function subscribe(req, res, next) {
         .catch(next);
 };
 
-async function edit(req, res, next) {
-
-    try {
-        const announcement = await animalManager.getOne(req.params.animalId);
-        const announcementId = req.params.announcementId;
-        let res = await announcementModel.findById(announcementId).lean();
-
-
-        const user = req.user?.email.toString()
-
-        if (!(animal.owner?.toString() == req.user?._id)) {
-            return res.redirect('/404');
-        };
-
-        res.render(`animals/edit`, { ...animal, user });
-    } catch (error) {
-        return res.status(400).render('404', { error: getErrorMessage(error) })
-    }
-
-};
-
 function editAnnouncement(req, res, next) {
-    const { _id: userId } = req.user;
+    const id  = res.req.params['announcementId'];
+    console.log(id);
     const { from, to, price, date, seats, description } = req.body;
 
-    announcementModel.findOneAndUpdate({ _id: userId }, { from, to, price, date, seats, description }, { runValidators: true, new: true })
+    announcementModel.findByIdAndUpdate(id, { from, to, price, date, seats, description }, { runValidators: true, new: true })
         .then(x => { res.status(200).json(x) })
+        .catch(next);
+}
+
+async function deleteAnnouncement(req, res, next){
+
+    const announcementId  = req.params['announcementId'];
+    // const { _id: userId } = req.user;
+    // const isOwner = announcementId=== userId
+    // console.log(announcementId);
+    // console.log(userId);
+    // announcementModel.findOneAndDelete({ announcementId })
+        const announcement = await announcementModel.findByIdAndDelete(announcementId);
+        return;
+    
+
+    Promise.all([
+        postModel.findOneAndDelete({ _id: postId, userId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { posts: postId } }),
+        announcementModel.findOneAndUpdate({ _id: announcementId }, { $pull: { posts: postId } }),
+    ])
+        .then(([deletedOne, _, __]) => {
+            if (deletedOne) {
+                res.status(200).json(deletedOne)
+            } else {
+                res.status(401).json({ message: `Not allowed!` });
+            }
+        })
         .catch(next);
 }
 
@@ -79,6 +84,6 @@ module.exports = {
     createAnnouncement,
     getAnnouncement,
     subscribe,
-    edit,
-    editAnnouncement
+    editAnnouncement,
+    deleteAnnouncement
 }

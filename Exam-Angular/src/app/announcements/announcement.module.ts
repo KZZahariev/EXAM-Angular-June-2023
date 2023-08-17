@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 // import { AnnouncementRoutingModule } from './announcement.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrentAnnouncementComponent } from './current-announcement/current-announcement.component';
-import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
+import { MyAnnouncementsComponent } from './my-announcements/my-announcements.component';
 
 @NgModule({
-  declarations: [NewAnnouncementComponent, CurrentAnnouncementComponent, EditAnnouncementComponent],
+  declarations: [NewAnnouncementComponent, CurrentAnnouncementComponent, MyAnnouncementsComponent],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule ], //AnnouncementRoutingModule,
 })
 export class AnnouncementModule {}

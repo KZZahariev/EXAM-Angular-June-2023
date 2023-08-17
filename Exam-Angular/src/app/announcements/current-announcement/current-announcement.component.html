@@ -1,126 +1,142 @@
-<div *ngIf="announcement" class="p-10 mb-12 flex-nowrap no-scrollbar flex items-center justify-center opacity-90">
-    <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
-        <h2 class="text-slate-100 text-2xl font-semibold mb-4">Current Ad</h2>
-        <div class="mb-4">
-            <label for="title" class="block text-gray-500 text-sm font-medium my-2">I'm travel</label>
-            <ul>
-                <li class="mr-2 mb-2">
-                    <label for="from" class="block text-gray-500 text-sm font-medium">From: <span class="text-white">
-                            {{announcement.from}}</span></label>
-                </li>
-                <li class="mr-2 mb-2">
-                    <label for="to" class="block text-gray-500 text-sm font-medium">To: <span class="text-white">
-                            {{announcement.to}}</span></label>
-                </li>
-                <li class="mr-7 mb-2">
-                    <label for="price" class="block text-gray-500 text-sm font-medium">Price of ticket: <span
-                            class="text-white">
-                            {{announcement.price}}</span></label>
-                </li>
-                <li class="mr-7 mb-2">
-                    <label for="price" class="block text-gray-500 text-sm font-medium">Date: <span class="text-white">
-                            {{announcement.date}}</span></label>
-                </li>
-                <li class="mr-7 mb-2">
-                    <label for="price" class="block text-gray-500 text-sm font-medium">Number of seats: <span
-                            class="text-white">
-                            {{announcement.seats}}</span></label>
-                </li>
-                <li class="mr-7 mb-2">
-                    <label for="price" class="block text-gray-500 text-sm font-medium">Description: <span
-                            class="text-white">
-                            {{announcement.description}}</span></label>
-                </li>
+<div>
+    <ng-container *ngIf="!isEditMode">
+        <div *ngIf="announcement"
+            class="p-10 mb-12 flex-nowrap no-scrollbar flex items-center justify-center opacity-90">
+            <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
+                <h2 class="text-slate-100 text-2xl font-semibold mb-4"></h2>
+                <div class="mb-4">
+                    <label *ngIf="isOwner" for="title" class="block text-gray-500 text-sm font-medium my-2">I'm
+                        travel</label>
+                    <label *ngIf="!isOwner" for="title" class="block text-gray-500 text-sm font-medium my-2">Do you want
+                        to travel</label>
+                    <ul>
+                        <li class="mr-2 mb-2">
+                            <label for="from" class="block text-gray-500 text-sm font-medium">From: <span
+                                    class="text-white">
+                                    {{announcement.from}}</span></label>
+                        </li>
+                        <li class="mr-2 mb-2">
+                            <label for="to" class="block text-gray-500 text-sm font-medium">To: <span
+                                    class="text-white">
+                                    {{announcement.to}}</span></label>
+                        </li>
+                        <li class="mr-7 mb-2">
+                            <label for="price" class="block text-gray-500 text-sm font-medium">Price of ticket: <span
+                                    class="text-white">
+                                    {{announcement.price}}</span></label>
+                        </li>
+                        <li class="mr-7 mb-2">
+                            <label for="price" class="block text-gray-500 text-sm font-medium">Date: <span
+                                    class="text-white">
+                                    {{announcement.date}}</span></label>
+                        </li>
+                        <li class="mr-7 mb-2">
+                            <label for="price" class="block text-gray-500 text-sm font-medium">Number of seats: <span
+                                    class="text-white">
+                                    {{announcement.seats}}</span></label>
+                        </li>
+                        <li class="mr-7 mb-2">
+                            <label for="price" class="block text-gray-500 text-sm font-medium">Description: <span
+                                    class="text-white">
+                                    {{announcement.description}}</span></label>
+                        </li>
 
-            </ul>
-        </div>
-        <ul *ngIf="isLogged">
-            <ul *ngIf="currentUserId === this.announcement.userId">
+                    </ul>
+                </div>
+                <ul *ngIf="isLogged">
+                    <ul *ngIf="isOwner">
+                        <li class="p-2 flex flex-nowrap">
+                            <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                (click)="toggleEditMode()">Edit</a>
+                        </li>
+                        <li class="p-2 flex flex-nowrap">
+                            <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                (click)="deleteAnnouncementHandler()">Delete</a>
+                        </li>
+                    </ul>
+                    <ul *ngIf="!isOwner">
+                        <li class="p-2 flex flex-nowrap" *ngIf="isReserved()">
+                            <h3
+                                class="w-full flex justify-center text-white py-2  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                You are already reserved.</h3>
+                        </li>
+                        <li class="p-2 flex flex-nowrap" *ngIf="!isReserved()">
+                            <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                (click)="subscribeForTraveling()">Reserve</a>
+                        </li>
+                    </ul>
+                </ul>
                 <li class="p-2 flex flex-nowrap">
                     <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        routerLink="/announcements">Edit</a>
+                        routerLink="/announcements">Back</a>
                 </li>
-                <li class="p-2 flex flex-nowrap">
-                    <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        routerLink="/announcements">Delete</a>
-                </li>
-            </ul>
-            <ul *ngIf="currentUserId !== this.announcement.userId">
-                    <li class="p-2 flex flex-nowrap">
-                        <a routerLink="/reserve"
-                        class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Reserve</a>
-                    </li>
-            </ul>
-        </ul>
-        <li class="p-2 flex flex-nowrap">
-            <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                routerLink="/announcements">Back</a>
-        </li>
-    </div>
-</div>
-
-<div *ngIf="announcement" class="p-10 mb-12 flex-nowrap no-scrollbar flex items-center justify-center opacity-90">
-    <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
-        <h2 class="text-slate-100 text-2xl font-semibold mb-4">Current Ad</h2>
-        <!-- <form [formGroup]="form" (ngSubmit)="saveAnnouncementHandler()"> -->
-            <div class="mb-4">
-                <label for="title" class="block text-gray-500 text-sm font-medium my-2">I'm travel</label>
-                <ul class="p-2 flex flex-nowrap">
-    
-                </ul>
-                <ul>
-                    <li class="mr-2 mb-2">
-                        <label for="from" class="block text-gray-500 text-sm font-medium">From: <span class="text-white">
-                                {{announcement.from}}</span></label>
-                    </li>
-                    <li class="mr-2 mb-2">
-                        <label for="to" class="block text-gray-500 text-sm font-medium">To: <span class="text-white">
-                                {{announcement.to}}</span></label>
-                    </li>
-                    <li class="mr-7 mb-2">
-                        <label for="price" class="block text-gray-500 text-sm font-medium">Price of ticket: <span
-                                class="text-white">
-                                {{announcement.price}}</span></label>
-                    </li>
-                    <li class="mr-7 mb-2">
-                        <label for="price" class="block text-gray-500 text-sm font-medium">Date: <span class="text-white">
-                                {{announcement.date}}</span></label>
-                    </li>
-                    <li class="mr-7 mb-2">
-                        <label for="price" class="block text-gray-500 text-sm font-medium">Number of seats: <span
-                                class="text-white">
-                                {{announcement.seats}}</span></label>
-                    </li>
-                    <li class="mr-7 mb-2">
-                        <label for="price" class="block text-gray-500 text-sm font-medium">Description: <span
-                                class="text-white">
-                                {{announcement.description}}</span></label>
-                    </li>
-    
-                </ul>
             </div>
-            <ul *ngIf=>
-                <li class="p-2 flex flex-nowrap">
-                    <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        routerLink="/announcements">Edit</a>
-                </li>
-                <li class="p-2 flex flex-nowrap">
-                    <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        routerLink="/announcements">Delete</a>
-                </li>
-            </ul>
-        <!-- </form> -->
-        <ul >
-            <ul >
+        </div>
+    </ng-container>
+
+    <!-- ----------------EDIT MODE------------- -->
+    <ng-container *ngIf="isEditMode">
+        <div class="min-h-screen flex items-center justify-center opacity-90">
+            <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
+                <h2 class="text-slate-100 text-2xl font-semibold mb-4">Edit your announcement.</h2>
+                <form #form="ngForm" (ngSubmit)="saveAnnouncementHandler(form)">
+                    <div class="mb-4">
+                        <label for="title" class="block text-gray-500 text-sm font-medium my-2">Where are you
+                            travel?</label>
+                        <ul class="p-2 flex flex-nowrap">
+                            <li class="mr-2 mb-2">
+                                <label for="from" class="block text-gray-500 text-sm font-medium">From:</label>
+                                <input type="text" id="from" name="from"
+                                    class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                                    [(ngModel)]="announcement!.from" ngModel #inputName="ngModel" required>
+                            </li>
+                            <li class="mr-2 mb-2">
+                                <label for="to" class="block text-gray-500 text-sm font-medium">To:</label>
+                                <input type="text" id="to" name="to"
+                                    class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                                    [(ngModel)]="announcement!.to" ngModel #inputName="ngModel" required>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="mr-7 mb-2">
+                                <label for="price" class="block text-gray-500 text-sm font-medium">Price of
+                                    ticket:</label>
+                                <input type="number" id="price" name="price"
+                                    class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                                    [(ngModel)]="announcement!.price" ngModel #inputName="ngModel" required>
+                            </li>
+                            <li class="mr-7 mb-2">
+                                <label for="date" class="block text-gray-500 text-sm font-medium">Date and time:</label>
+                                <input type="datetime-local" id="date" name="date"
+                                    class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                                    [(ngModel)]="announcement!.date" ngModel #inputName="ngModel" required>
+                            </li>
+                            <li class="mr-7 mb-2">
+                                <label for="seats" class="block text-gray-500 text-sm font-medium">Seats
+                                    available:</label>
+                                <input type="number" id="seats" name="seats"
+                                    class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
+                                    [(ngModel)]="announcement!.seats" ngModel #inputName="ngModel" required>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-gray-500 text-sm font-medium">Description</label>
+                        <textarea id="description" name="description"
+                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 h-32 resize-none"
+                            [(ngModel)]="announcement!.description" ngModel #inputName="ngModel" required></textarea>
+                    </div>
                     <li class="p-2 flex flex-nowrap">
-                        <a routerLink="/reserve"
-                        class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Reserve</a>
+                        <button type="submit"
+                            class="w-full flex justify-center bg-gray-500 text-white py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2w-full rounded-md focus:ring-offset-2">Save</button>
                     </li>
-            </ul>
-        </ul>
-        <li class="p-2 flex flex-nowrap">
-            <a class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                routerLink="/announcements">Back</a>
-        </li>
-    </div>
+                    <li class="p-2 flex flex-nowrap">
+                        <button type="submit"
+                            class="w-full flex justify-center bg-gray-500 text-white py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2w-full rounded-md focus:ring-offset-2"
+                            (click)="cancel()">Back</button>
+                    </li>
+                </form>
+            </div>
+        </div>
+    </ng-container>
 </div>

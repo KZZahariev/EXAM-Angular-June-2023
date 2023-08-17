@@ -17,7 +17,7 @@ export class RegisterComponent {
     email: ['', Validators.required, appEmailValidator(DEFAULT_EMAIL_DOMAINS)],
     passGroup: this.fb.group(
       {
-        password: ['', Validators.required, Validators.minLength(5)],
+        password: ['', [Validators.required, Validators.minLength(5)]],
         rePassword: ['', Validators.required]
       },
       {

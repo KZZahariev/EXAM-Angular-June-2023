@@ -21,11 +21,10 @@ export class AnnouncementsListComponent implements OnInit {
     return this.userService.isLogged
   }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     
     this.apiService.loadAnnouncements().subscribe({
       next: (value) => {
-        console.log(value);
         this.announcementList = value;
         this.isLoading = false;
       },

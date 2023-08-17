@@ -77,4 +77,13 @@ export class UserService implements OnDestroy {
   getUserIdFunction(){
     return this.user$$.value?._id
   }
+
+  getUsers(){
+    return this.http.get<User[]>(`/api/users/users`)
+  }
+
+  // getUserName(){
+  //   console.log(this.user$);
+     
+  // }
 }

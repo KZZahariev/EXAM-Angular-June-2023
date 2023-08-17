@@ -10,9 +10,11 @@ router.post('/', auth(), announcementController.createAnnouncement);
 
 router.get('/:announcementId', announcementController.getAnnouncement);
 router.post('/:announcementId', auth(), postController.createPost);
-router.put('/:announcementId', auth(), announcementController.subscribe);
-router.get('/:announcementId/edit', auth(), announcementController.editAnnouncement);
+router.put('/:announcementId', auth(), announcementController.editAnnouncement);
+router.delete('/:announcementId/delete', auth(), announcementController.deleteAnnouncement);
+router.put('/:announcementId/subscribe', auth(), announcementController.subscribe);
 router.put('/:announcementId/posts/:postId', auth(), postController.editPost);
+
 router.delete('/:announcementId/posts/:postId', auth(), postController.deletePost);
 
 // router.get('/my-trips/:id/reservations', auth(), announcementController.getReservations);

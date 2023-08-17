@@ -1,11 +1,12 @@
 const { userModel, announcementModel, postModel } = require('../models');
 
-function newPost(text, userId, announcementId) { //trqbva da vidq kakvi danni priema
+function newPost(text, userId, announcementId) {
     return postModel.create({ text, userId, announcementId })
         .then(post => {
             return Promise.all([
                 userModel.updateOne({ _id: userId }, { $push: { posts: post._id }, $addToSet: { announcements: announcementId } }),
-                announcementModel.findByIdAndUpdate({ _id: announcementId }, { $push: { posts: post._id }, $addToSet: { subscribers: userId } }, { new: true })
+                announcementModel.findByIdAndUpdate({ _id: announcementId }, { $push: { posts: post._id }, $addToSet: { subscribers: userId } }, { new: true }),
+                console.log('newPost')
             ])
         })
 }
@@ -27,7 +28,7 @@ function createPost(req, res, next) {
     const { announcementId } = req.params;
     const { _id: userId } = req.user;
     const { postText } = req.body;
-
+console.log('createPost');
     newPost(postText, userId, announcementId)
         .then(([_, updatedAnnouncement]) => res.status(200).json(updatedAnnouncement))
         .catch(next);

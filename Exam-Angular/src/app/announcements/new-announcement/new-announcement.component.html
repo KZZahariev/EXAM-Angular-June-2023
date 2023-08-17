@@ -1,7 +1,7 @@
 <!-- <div class="bg-cover"
             style="background-image: url(../../../assets/asphalt-highway.jpg)">
         </div> -->
-<div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center opacity-90">
     <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
         <h2 class="text-slate-100 text-2xl font-semibold mb-4">Add Announcement</h2>
         <form #form="ngForm" (submit)="addNewAnnouncement(form)">
@@ -12,13 +12,31 @@
                         <label for="from" class="block text-gray-500 text-sm font-medium">From:</label>
                         <input type="text" id="from" name="from"
                             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-                            ngModel #inputName="ngModel" required>
+                            ngModel #inputFrom="ngModel" required minlength="2">
+                        <!-- "From" validation -->
+                        <ng-container *ngIf="inputFrom.touched">
+                            <p class="text-red-500" *ngIf="inputFrom.errors?.['required']">
+                                "From" is required.
+                            </p>
+                            <p class="text-red-500" *ngIf="inputFrom.errors?.['minlength']">
+                                "From" must be at least 2 characters long.
+                            </p>
+                        </ng-container>
                     </li>
                     <li class="mr-2 mb-2">
                         <label for="to" class="block text-gray-500 text-sm font-medium">To:</label>
                         <input type="text" id="to" name="to"
                             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-                            ngModel #inputName="ngModel" required>
+                            ngModel #inputTo="ngModel" required minlength="2">
+                        <!-- "To" validation -->
+                        <ng-container *ngIf="inputTo.touched">
+                            <p class="text-red-500" *ngIf="inputTo.errors?.['required']">
+                                "To" is required.
+                            </p>
+                            <p class="text-red-500" *ngIf="inputTo.errors?.['minlength']">
+                                "To" must be at least 2 characters long.
+                            </p>
+                        </ng-container>
                     </li>
                 </ul>
                 <ul>
@@ -26,47 +44,41 @@
                         <label for="price" class="block text-gray-500 text-sm font-medium">Price of ticket:</label>
                         <input type="number" id="price" name="price"
                             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                            ngModel #inputName="ngModel" required>
+                            ngModel #inputPrice="ngModel" required>
+                        <!-- "Price" validation -->
+                        <ng-container *ngIf="inputPrice.touched">
+                            <p class="text-red-500" *ngIf="inputPrice.errors?.['required']">
+                                "Price" is required.
+                            </p>
+                        </ng-container>
                     </li>
+                </ul>
+                <ul>
                     <li class="mr-7 mb-2">
                         <label for="date" class="block text-gray-500 text-sm font-medium">Date and time:</label>
                         <input type="datetime-local" id="date" name="date"
                             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                            ngModel #inputName="ngModel" required>
+                            ngModel #inputDate="ngModel" required>
+                        <!-- "Date" validation -->
+                        <ng-container *ngIf="inputDate.touched">
+                            <p class="text-red-500" *ngIf="inputDate.errors?.['required']">
+                                "Date" is required.
+                            </p>
+                        </ng-container>
                     </li>
-                <!-- <ul class="p-2 mb-2 flex flex-nowrap">
-                    <li class="mr-2 mb-2">
-                            <label for="title" class="block text-gray-500 text-sm font-medium">Vehicle type:</label>
-                            <input type="option" id="vehicle" name="vehicle"
-                                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                                required>
-                    </li>
-                    <li class="mr-2 mb-2">
-                            <label for="title" class="block text-gray-500 text-sm font-medium">Make and model:</label>
-                            <input type="text" id="make-and-model" name="make-and-model"
-                                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                                required>
-                    </li>
-                </ul> -->
-                    <!-- <li class="mr-7 mb-2">
-                        <label for="baggage" class="block text-gray-500 text-sm font-medium">Space for baggage:</label>
-                        <select
-                            class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                            required>
-                            <input type="option" id="baggage" name="baggage"
-                                class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                                ngOptions required>
-                            <option>No space</option>
-                            <option>Small space</option>
-                            <option>Max one suitcase per person - 55 x 40 x 23 cm</option>
-                            <option>A lot of space</option>
-                        </select>
-                    </li> -->
+                </ul>
+                <ul>
                     <li class="mr-7 mb-2">
                         <label for="seats" class="block text-gray-500 text-sm font-medium">Seats available:</label>
                         <input type="number" id="seats" name="seats"
                             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent m- focus:border-gray-500 focus:bg-white focus:ring-0"
-                            ngModel #inputName="ngModel" required>
+                            ngModel #inputSeats="ngModel" required>
+                        <!-- "Seats" validation -->
+                        <ng-container *ngIf="inputSeats.touched">
+                            <p class="text-red-500" *ngIf="inputSeats.errors?.['required']">
+                                "Seats" is required.
+                            </p>
+                        </ng-container>
                     </li>
                 </ul>
             </div>
@@ -74,9 +86,18 @@
                 <label for="description" class="block text-gray-500 text-sm font-medium">Description</label>
                 <textarea id="description" name="description"
                     class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 h-32 resize-none"
-                    ngModel #inputName="ngModel" required></textarea>
+                    ngModel #inputDescription="ngModel" required minlength="5"></textarea>
+                    <!-- "description" validation -->
+                    <ng-container *ngIf="inputDescription.touched">
+                        <p class="text-red-500" *ngIf="inputDescription.errors?.['required']">
+                            "Description is required.
+                        </p>
+                        <p class="text-red-500" *ngIf="inputDescription.errors?.['minlength']">
+                            "Description" must be at least 5 characters long.
+                        </p>
+                    </ng-container>
             </div>
-            <button type="submit"
+            <button type="submit" [disabled]="form.invalid"
                 class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Add
                 Announcement</button>
         </form>

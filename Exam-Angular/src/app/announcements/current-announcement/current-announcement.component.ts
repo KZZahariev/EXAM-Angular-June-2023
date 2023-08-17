@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { UserService } from 'src/app/user/user.service';
 import { Announcement } from 'src/interfaces/announcement';
@@ -11,46 +12,85 @@ import { Announcement } from 'src/interfaces/announcement';
 })
 export class CurrentAnnouncementComponent implements OnInit {
   announcement: Announcement | undefined;
-  
+  isEditMode: boolean = false;
+
   constructor(
     private apiService: ApiService,
     private activateRouter: ActivatedRoute,
-    private userService: UserService
-    ) { console.log(this.isOwner);
-      console.log(this.currentUserId);
-      console.log(this.announcement?.userId);
+    private userService: UserService,
+    private router: Router
+  ) { }
 
-    }
-    
-    get isLogged(): boolean{
-      return this.userService.isLogged
-    }
-
-    get currentUserId(): any {
-      return this.userService.getUserIdFunction()
-    }
-    
-    
-    get isOwner(): boolean {
-      return this.announcement?.userId === this.currentUserId
-    }
-
-    ngOnInit(): void {
-      this.fetchAnnouncement()
+  get isLogged(): boolean {
+    return this.userService.isLogged;
   }
+
+  get currentUserId(): any {
+    return this.userService.getUserIdFunction();
+  }
+
+  get isOwner(): boolean {
+    return this.announcement?.userId === this.currentUserId;
+  }
+
+  // get isReserved(): boolean {
+  //   return this.announcement?.subscribers.find(this.currentUserId)
+  // }
   
-  fetchAnnouncement(){
-    const id = this.activateRouter.snapshot.params['announcementId']
+  isReserved(){
+    return this.announcement?.subscribers.includes(this.currentUserId);
+  }
+
+
+  ngOnInit(): void {
+    this.fetchAnnouncement();
+  }
+
+  
+  fetchAnnouncement() {
+    const id = this.activateRouter.snapshot.params['announcementId'];
     
     this.apiService.loadAnnouncement(id).subscribe((announcement) => {
       this.announcement = announcement;
-    })
+    });
+  }
+  
+  
+  toggleEditMode(): void {
+    this.isEditMode = !this.isEditMode;
   }
 
-  saveAnnouncementHandler(){
-    
+  saveAnnouncementHandler(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
+
+    // this.profileDetails = { ...form.value } as Announcement;
+    const id = this.activateRouter.snapshot.params['announcementId'];
+    const { from, to, price, date, seats, description } = form.value;
+    this.apiService.updateAnnouncement(from!, to!, price!, date!, seats!, description!, id!).subscribe((announcement) => {
+      this.toggleEditMode();
+    });
+  };
+
+  deleteAnnouncementHandler(): void {
+    const id = this.activateRouter.snapshot.params['announcementId'];
+
+    this.apiService.deleteAnnouncement(id!).subscribe((announcement)=>{
+    })
+    this.router.navigate(['/announcements'])
   }
-  // get isOwner(): boolean {
-  // }
-  
+
+  subscribeForTraveling(){
+    const announcementId = this.activateRouter.snapshot.params['announcementId'];
+
+    this.apiService.subscribeAnnouncement(announcementId).subscribe((announcement) => {
+    })
+    this.router.navigate([`announcements/${announcementId}`])
+  }
+
+  cancel(): void {
+    this.toggleEditMode()
+  }
+
 }

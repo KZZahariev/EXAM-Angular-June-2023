@@ -34,10 +34,10 @@ const announcementSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
-    posts: [{
-        type: ObjectId,
-        ref: "Post"
-    }],
+    // posts: [{
+    //     type: ObjectId,
+    //     ref: "Post"
+    // }],
 }, { timestamps: { createdAt: 'created_at' } });
 
 module.exports = mongoose.model('Announcement', announcementSchema);

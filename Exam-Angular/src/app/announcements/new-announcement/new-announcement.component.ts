@@ -18,7 +18,6 @@ export class NewAnnouncementComponent {
 
     const { from, to, price, date, seats, description } = form.value;
 
-    console.log(form.value);
     this.apiService.createNewAnnouncement(from, to, price, date, seats, description).subscribe(() => {
       this.router.navigate(['/announcements']); 
     });

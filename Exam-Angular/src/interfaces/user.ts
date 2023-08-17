@@ -5,6 +5,7 @@ export interface User {
     email: string;
     userId: IUser;
     posts: any; //string[] | IPost;
+    announcements: IUser
     created_at: string;
     updated_at: string;
     _id: string;

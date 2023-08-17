@@ -10,7 +10,6 @@ export interface Announcement {
   description: string;
   subscribers: string;
   userId: IUser;
-  posts: any; //string[] | IPost;
   created_at: string;
   updated_at: string;
   _id: string;
