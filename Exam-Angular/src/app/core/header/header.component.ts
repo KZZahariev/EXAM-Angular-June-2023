@@ -36,7 +36,7 @@ export class HeaderComponent {
         this.router.navigate(['/users/profile'])
       },
       error: () => {
-        console.log('Can not logout right now');
+        console.log('Can not load a profile information right now');
       }
     })
   }

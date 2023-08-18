@@ -85,8 +85,9 @@ export class CurrentAnnouncementComponent implements OnInit {
     const announcementId = this.activateRouter.snapshot.params['announcementId'];
 
     this.apiService.subscribeAnnouncement(announcementId).subscribe((announcement) => {
+      console.log(announcementId);
+      location.reload()
     })
-    this.router.navigate([`announcements/${announcementId}`])
   }
 
   cancel(): void {
