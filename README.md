@@ -1,4 +1,4 @@
-![user-other-announcement-details](https://github.com/KZZahariev/EXAM-Angular-June-2023/assets/114062450/750d2d9f-078b-427e-a64c-ddca91880548)# Travel in Bulgaria App
+# Travel in Bulgaria App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
 
