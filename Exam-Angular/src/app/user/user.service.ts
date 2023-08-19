@@ -2,7 +2,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/interfaces/user';
-import { IUser } from 'src/interfaces/user-id';
 
 @Injectable({
   providedIn: 'root',
@@ -82,8 +81,4 @@ export class UserService implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  // getUserName(){
-  //   console.log(this.user$);
-     
-  // }
 }

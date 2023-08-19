@@ -33,10 +33,6 @@ export class CurrentAnnouncementComponent implements OnInit {
     return this.announcement?.userId === this.currentUserId;
   }
 
-  // get isReserved(): boolean {
-  //   return this.announcement?.subscribers.find(this.currentUserId)
-  // }
-  
   isReserved(){
     return this.announcement?.subscribers.includes(this.currentUserId);
   }
@@ -65,7 +61,6 @@ export class CurrentAnnouncementComponent implements OnInit {
       return;
     }
 
-    // this.profileDetails = { ...form.value } as Announcement;
     const id = this.activateRouter.snapshot.params['announcementId'];
     const { from, to, price, date, seats, description } = form.value;
     this.apiService.updateAnnouncement(from!, to!, price!, date!, seats!, description!, id!).subscribe((announcement) => {
@@ -76,7 +71,6 @@ export class CurrentAnnouncementComponent implements OnInit {
   deleteAnnouncementHandler(): void {
     const id = this.activateRouter.snapshot.params['announcementId'];
     
-    // this.apiService.deleteAnnouncementFromUser(id!).subscribe((announcement)=>{})
     this.apiService.deleteAnnouncement(id!).subscribe((announcement)=>{
     })
     this.router.navigate(['/announcements'])

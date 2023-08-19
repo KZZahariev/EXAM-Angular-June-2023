@@ -17,7 +17,7 @@ export class LoginComponent {
 
   login(form: NgForm): void{
     if (form.invalid) {
-      return console.log('The form is invalid!')
+      throw new Error('Username or password is incorrect!')
     }
 
     const { email, password } = form.value
@@ -25,7 +25,5 @@ export class LoginComponent {
     this.userService.login(email, password).subscribe(() => {
       this.router.navigate(['/'])
     })
-
   }
-
 }

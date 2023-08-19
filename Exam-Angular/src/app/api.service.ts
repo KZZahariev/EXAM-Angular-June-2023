@@ -4,8 +4,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Announcement } from 'src/interfaces/announcement';
 import { IPost } from 'src/interfaces/posts';
-import { User } from 'src/interfaces/user';
-import { IUser } from 'src/interfaces/user-id';
+
 
 const apiUrl = environment.apiUrl;
 
@@ -72,9 +71,6 @@ export class ApiService {
     return this.http.delete<Announcement>(`/api/announcements/${id}/delete`)  
   }
 
-  // deleteAnnouncementFromUser(id: string) {
-  //   return this.http.delete<User>(`/api/announcements/${id}/delete`) 
-  // }
 
   subscribeAnnouncement(id: string){
     return this.http.put<Announcement>(`/api/announcements/${id}/subscribe`, {

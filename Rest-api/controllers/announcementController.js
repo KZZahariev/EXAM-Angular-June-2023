@@ -56,29 +56,11 @@ async function deleteAnnouncement(req, res, next){
 
     const announcementId  = req.params['announcementId'];
     const { _id: userId } = req.user;
-    // const isOwner = announcementId=== userId
-    // console.log(announcementId);
-    // console.log(userId);
-    // announcementModel.findOneAndDelete({ announcementId })
+
         const announcement = await announcementModel.findByIdAndDelete(announcementId);
         const user = await userModel.findOneAndUpdate({ _id: userId }, { $pull: { announcements: announcementId } })
         return;
     
-
-    Promise.all([
-        // postModel.findOneAndDelete({ _id: postId, userId }),
-        userModel.findOneAndUpdate({ _id: userId }, { $pull: { announcements: announcementId } }),
-        announcementModel.findByIdAndDelete(announcementId)
-        // announcementModel.findOneAndUpdate({ _id: announcementId }, { $pull: { posts: postId } }),
-    ])
-        .then(([deletedOne, _, __]) => {
-            if (deletedOne) {
-                res.status(200).json(deletedOne)
-            } else {
-                res.status(401).json({ message: `Not allowed!` });
-            }
-        })
-        .catch(next);
 }
 
 module.exports = {

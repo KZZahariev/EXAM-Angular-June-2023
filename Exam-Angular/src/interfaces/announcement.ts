@@ -1,7 +1,6 @@
 import { IUser } from './user-id';
 
 export interface Announcement {
-//   announcementName: string;
   from: string;
   to: string;
   price: number;
