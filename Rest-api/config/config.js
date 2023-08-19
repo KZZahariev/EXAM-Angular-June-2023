@@ -8,7 +8,7 @@ const config = {
     },
     production: {
         port: process.env.PORT || 3000,
-        dbURL: 'mongodb+srv://KZZahariev:<Paris9602>@cluster0.uz1syes.mongodb.net/?retryWrites=true&w=majority', //process.env.DB_URL_CREDENTIALS, //
+        dbURL: 'mongodb+srv://KZZahariev:Paris9602@cluster0.uz1syes.mongodb.net/?retryWrites=true&w=majority', //process.env.DB_URL_CREDENTIALS, //
         origin: ['http://localhost:5555', 'http://localhost:4200']
     }
 };
