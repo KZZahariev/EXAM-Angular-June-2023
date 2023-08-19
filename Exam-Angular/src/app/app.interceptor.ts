@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { ErrorService } from './core/error/error.service';
 import { Router } from '@angular/router';
 
