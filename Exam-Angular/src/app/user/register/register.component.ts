@@ -12,6 +12,9 @@ import { matchPasswordValidator } from 'src/app/shared/validators/match-password
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+
+  emailDomains = DEFAULT_EMAIL_DOMAINS
+  
   form = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(5)]],
     email: ['', Validators.required, appEmailValidator(DEFAULT_EMAIL_DOMAINS)],
