@@ -4,7 +4,7 @@
     style="background-image: url(../../assets/asphalt-highway.jpg)">
     <div class="grid grid-cols-1 md:grid-cols-3 pt-5 m-6  opacity-90">
         <div *ngFor="let announcement of announcementList"
-            class="p-2 mb-12 flex-nowrap no-scrollbar flex items-center justify-center">
+            class="transform transition-all hover:scale-105 p-2 mb-12 flex-nowrap no-scrollbar flex items-center justify-center">
             <div class="bg-gray-800 p-8 shadow-md rounded-md w-96">
                 <h2 class="text-slate-100 text-2xl font-semibold mb-4">{{announcement.userId.username}} posted</h2>
                 <div class="mb-4">
@@ -29,9 +29,9 @@
                     </ul>
                 </div>
                 <ul class="">
-                    <li class="p-2 flex flex-nowrap">
-                        <a [routerLink]="announcement._id"
-                            class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Details</a>
+                    <li class="transform transition-all hover:scale-105 p-2 flex flex-nowrap">
+                        <button [routerLink]="announcement._id"
+                            class="w-full flex justify-center bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Details</button>
                     </li>
                 </ul>
             </div>

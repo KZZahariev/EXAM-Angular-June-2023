@@ -18,7 +18,7 @@ interface Profile {
 export class ProfileComponent implements OnInit {
   isEditMode: boolean = false
 
-  profileDetails: Profile | undefined = {
+  profileDetails: Profile  = {
     username: '',
     email: '',
     posts: ''

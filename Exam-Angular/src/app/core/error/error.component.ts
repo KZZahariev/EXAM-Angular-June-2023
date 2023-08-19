@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorService } from './error.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-error',
