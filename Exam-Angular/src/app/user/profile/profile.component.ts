@@ -7,7 +7,7 @@ import { DEFAULT_EMAIL_DOMAINS } from 'src/app/shared/constants';
 interface Profile {
   username: string,
   email: string,
-  posts: string,  
+  announcements: string,  
 }
 
 @Component({
@@ -18,10 +18,10 @@ interface Profile {
 export class ProfileComponent implements OnInit {
   isEditMode: boolean = false
 
-  profileDetails: Profile  = {
+  profileDetails: Profile = {
     username: '',
     email: '',
-    posts: ''
+    announcements: ''
   }
 
   form = this.fb.group({
@@ -30,23 +30,23 @@ export class ProfileComponent implements OnInit {
       '',
       [Validators.required, appEmailValidator(DEFAULT_EMAIL_DOMAINS)]
     ],
-    posts: ['',[Validators.required]]
+    announcements: ['',[Validators.required]]
   })
 
   constructor(private fb: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
-    const { username, email, posts } = this.userService.user!;
+    const { username, email, announcements } = this.userService.user!;
     this.profileDetails = {
       username,
       email,
-      posts
+      announcements
     };
 
     this.form.setValue({
       username,
       email,
-      posts
+      announcements
     })
   };
 

@@ -1,4 +1,4 @@
-const { announcementModel } = require('../models');
+const { announcementModel, userModel } = require('../models');
 const { newPost } = require('./postController')
 
 function getAnnouncements(req, res, next) {
@@ -55,19 +55,21 @@ function editAnnouncement(req, res, next) {
 async function deleteAnnouncement(req, res, next){
 
     const announcementId  = req.params['announcementId'];
-    // const { _id: userId } = req.user;
+    const { _id: userId } = req.user;
     // const isOwner = announcementId=== userId
     // console.log(announcementId);
     // console.log(userId);
     // announcementModel.findOneAndDelete({ announcementId })
         const announcement = await announcementModel.findByIdAndDelete(announcementId);
+        const user = await userModel.findOneAndUpdate({ _id: userId }, { $pull: { announcements: announcementId } })
         return;
     
 
     Promise.all([
-        postModel.findOneAndDelete({ _id: postId, userId }),
-        userModel.findOneAndUpdate({ _id: userId }, { $pull: { posts: postId } }),
-        announcementModel.findOneAndUpdate({ _id: announcementId }, { $pull: { posts: postId } }),
+        // postModel.findOneAndDelete({ _id: postId, userId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { announcements: announcementId } }),
+        announcementModel.findByIdAndDelete(announcementId)
+        // announcementModel.findOneAndUpdate({ _id: announcementId }, { $pull: { posts: postId } }),
     ])
         .then(([deletedOne, _, __]) => {
             if (deletedOne) {

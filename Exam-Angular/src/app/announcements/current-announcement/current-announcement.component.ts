@@ -75,7 +75,8 @@ export class CurrentAnnouncementComponent implements OnInit {
 
   deleteAnnouncementHandler(): void {
     const id = this.activateRouter.snapshot.params['announcementId'];
-
+    
+    // this.apiService.deleteAnnouncementFromUser(id!).subscribe((announcement)=>{})
     this.apiService.deleteAnnouncement(id!).subscribe((announcement)=>{
     })
     this.router.navigate(['/announcements'])
@@ -83,11 +84,11 @@ export class CurrentAnnouncementComponent implements OnInit {
 
   subscribeForTraveling(){
     const announcementId = this.activateRouter.snapshot.params['announcementId'];
-
+    
     this.apiService.subscribeAnnouncement(announcementId).subscribe((announcement) => {
-      console.log(announcementId);
-      location.reload()
+      this.announcement = announcement
     })
+    this.isReserved()
   }
 
   cancel(): void {

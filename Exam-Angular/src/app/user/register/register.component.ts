@@ -37,7 +37,7 @@ export class RegisterComponent {
 
   register(): void {
     if(this.form.invalid){
-      return console.log('form is invalid');
+      throw new Error('form is invalid')
     }
 
     const { username, email, passGroup:{password, rePassword} = {} } = this.form.value

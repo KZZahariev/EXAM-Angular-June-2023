@@ -1,6 +1,6 @@
 export interface IUser {
     announcements: string[];
-    posts: string[];
+    // posts: string[];
     _id: string;
     email: string;
     username: string;
