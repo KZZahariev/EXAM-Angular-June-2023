@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Announcement } from 'src/interfaces/announcement';
 import { IPost } from 'src/interfaces/posts';
 import { IUser } from 'src/interfaces/user-id';
